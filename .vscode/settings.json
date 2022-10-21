@@ -1,0 +1,22 @@
+{
+  // * prettier eslint 在 operator-linebreak 上會有衝突，
+  //  因此若 formatOnSave 之後還有錯，
+  //  就 F1 輸入指令 fix all auto-fixable problems (eslint)
+  //  之後就不要再按儲存
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "cSpell.words": ["algoliasearch", "firestore", "Leaderboard"]
+}
