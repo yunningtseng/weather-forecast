@@ -1,33 +1,51 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import api from '../api/api';
-import { Weather } from '../types/weather';
+import { WeatherDetail } from '../types/weather';
 import type { AppThunk } from './store';
 
 export interface WeatherState {
   city: string;
-  weather: Weather;
+  weatherList: WeatherDetail[];
+  errorMessage: string;
 }
 
 const initialState: WeatherState = {
   city: '',
-  weather: {} as Weather,
+  weatherList: [],
+  errorMessage: '',
 };
 
 const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setWeather: (state: WeatherState, action: PayloadAction<Weather>) => {
-      state.weather = action.payload;
+    setWeather: (
+      state: WeatherState,
+      action: PayloadAction<WeatherDetail[]>,
+    ) => {
+      state.weatherList = action.payload;
+    },
+
+    setCity: (state: WeatherState, action: PayloadAction<string>) => {
+      state.city = action.payload;
+    },
+
+    setErrorMessage: (state: WeatherState, action: PayloadAction<string>) => {
+      state.errorMessage = action.payload;
     },
   },
 });
 
-export const { setWeather } = weatherSlice.actions;
+export const { setWeather, setCity, setErrorMessage } = weatherSlice.actions;
 
 export const fetchData = (city: string): AppThunk => async (dispatch) => {
-  const data = await api.weather(city);
-  dispatch(setWeather(data));
+  const data = await api.getWeather(city);
+  if (data.type === 'data') {
+    dispatch(setWeather(data.weatherList));
+    dispatch(setCity(data.city));
+  } else {
+    dispatch(setErrorMessage(data.error));
+  }
 };
 
 export default weatherSlice;
