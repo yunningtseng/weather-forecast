@@ -1,19 +1,20 @@
-import { Console } from 'console';
 import { useRef, useEffect } from 'react';
 import { createStructuredSelector } from 'reselect';
-import WeatherItem from './components/WeatherItem';
+import Chart from './components/Chart';
+// import WeatherItem from './components/WeatherItem';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import { RootState } from './store/store';
-import { fetchData } from './store/weatherSlice';
+import { fetchData, setErrorMessage } from './store/weatherSlice';
 
 const weatherSelector = createStructuredSelector({
-  weather: (state: RootState) => state.weather.weather.list,
-  city: (state: RootState) => state.weather.weather.city,
+  city: (state: RootState) => state.weather.city,
+  weatherList: (state: RootState) => state.weather.weatherList,
+  errorMessage: (state: RootState) => state.weather.errorMessage,
 });
 
 function App() {
   const dispatch = useAppDispatch();
-  const { weather, city } = useAppSelector(weatherSelector);
+  const { weatherList, city, errorMessage } = useAppSelector(weatherSelector);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,26 +23,45 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="max-w-xs sm:max-w-xl md:max-w-3xl mx-auto mt-5">
-      <input className="border rounded-lg focus:outline-none" ref={inputRef} />
+    <div className="w-full bg-primary px-5 pt-16">
+      <div className="max-w-2xl mx-auto pt-10 bg-white rounded-xl p-3 sm:p-10">
+        <div className="text-center">
+          <input
+            className="w-48 sm:w-80 h-8 px-3 border-2 border-black rounded-xl focus:outline-none"
+            ref={inputRef}
+            placeholder="Search City"
+          />
 
-      <button
-        type="button"
-        onClick={() => {
-          const inputCity = inputRef?.current?.value;
-          if (inputCity) {
-            dispatch(fetchData(inputCity));
-          }
-        }}
-      >
-        送出
-      </button>
+          <button
+            type="button"
+            className="ml-5 px-3 py-1 rounded-lg bg-primary text-white hover:bg-third"
+            onClick={() => {
+              const inputCity = inputRef?.current?.value;
+              if (inputCity) {
+                dispatch(setErrorMessage(''));
+                dispatch(fetchData(inputCity));
+                // inputRef.current.value = '';
+              }
+            }}
+          >
+            Submit
+          </button>
 
-      {!weather && <p>查無資料，請重新輸入關鍵字</p>}
+          {errorMessage && (
+            <p className="mt-2 ml-2 text-rose-600 text-lg text-bold">
+              {errorMessage}
+            </p>
+          )}
+        </div>
 
-      <p>{city && city.name}</p>
+        <p className="text-center mt-5 text-secondary text-3xl font-bold">
+          {city && city}
+        </p>
 
-      {weather && <WeatherItem weather={weather} />}
+        {/* <WeatherItem weatherList={weatherList} /> */}
+
+        <Chart weatherList={weatherList} />
+      </div>
     </div>
   );
 }

@@ -1,52 +1,35 @@
-import { WeatherList } from '../types/weatherList';
+import { WeatherDetail } from '../types/weather';
 
 interface Props {
-  weather: WeatherList[];
+  weatherList: WeatherDetail[];
 }
 
-const timeList = [0, 8, 16, 24, 32];
-
-function WeatherItem({ weather }: Props) {
+function WeatherItem({ weatherList }: Props) {
   return (
-    <div>
-      <p>日期</p>
+    <div className="mt-5">
       <div className="flex">
-        {timeList.map((item) => (
-          <p key={item} className="mr-5">
-            {weather[item].dt_txt}
-          </p>
+        {weatherList.map((item, index) => (
+          <div
+            key={index}
+            className="text-center p-3 border border-neutral-800 bg-cyan-400 text-green-50"
+          >
+            <p>{item.dateTime}</p>
+
+            <div className="mt-3">{`${item.temp} (°C)`}</div>
+          </div>
         ))}
       </div>
 
-      <p>溫度</p>
+      {/* <p>Max Temperature (°C) / Min Temperature (°C)</p>
       <div className="flex">
-        {timeList.map((item) => (
-          <p key={item} className="mr-5">
-            {weather[item].main.temp}
-          </p>
-        ))}
-      </div>
-
-      <p>最高溫 (°C) / 最低溫 (°C)</p>
-      <div className="flex">
-        {timeList.map((item) => (
-          <p key={item} className="mr-5">
-            {weather[item].main.temp_max}
+        {weatherList.map((item, index) => (
+          <p key={index} className="mr-5">
+            {item.maxTemp}
             <span> / </span>
-            {weather[item].main.temp_min}
+            {item.minTemp}
           </p>
         ))}
-      </div>
-
-      <p>濕度</p>
-      <div className="flex">
-        {timeList.map((item) => (
-          <p key={item} className="mr-5">
-            {weather[item].main.humidity}
-            <span> %</span>
-          </p>
-        ))}
-      </div>
+      </div> */}
     </div>
   );
 }
