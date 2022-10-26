@@ -6,9 +6,12 @@ import {
 } from '../types/weather';
 
 const api = {
-  getWeather: async (city: string): Promise<WeatherData | WeatherError> => {
+  getWeather: async (
+    city: string,
+    units: string,
+  ): Promise<WeatherData | WeatherError> => {
     const fetchData = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=8da1ea379d115cb3e1c4763d9b772921&units=metric`,
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=8da1ea379d115cb3e1c4763d9b772921&units=${units}`,
     );
 
     if (fetchData.ok) {
