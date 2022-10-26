@@ -64,7 +64,7 @@ function App() {
                 dispatch(fetchData(city, 'metric'));
               }}
             >
-              攝氏
+              °C
             </button>
 
             <button
@@ -79,7 +79,7 @@ function App() {
                 dispatch(fetchData(city, 'imperial'));
               }}
             >
-              華氏
+              °F
             </button>
           </div>
         </div>
