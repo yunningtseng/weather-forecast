@@ -7,14 +7,10 @@ module.exports = {
         primary: '#5C969E', //深背景色
         secondary: '#1AA6B7', //深文字色
         third: '#3D7EA6', //內文文字
+        light: '#dce5e6',
       },
       animation: {
         barChart: 'barChart 1s ease-in-out',
-        // keyframes: {
-        //   barChart: {
-        //     '0%': { height: 0 },
-        //   },
-        // },
       },
     },
     screens: {
