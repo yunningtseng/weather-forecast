@@ -21,8 +21,8 @@ const api = {
         dateTime: data.list[i].dt_txt.substring(5, 11).replace('-', '/'),
         humidity: data.list[i].main.humidity,
         temp: data.list[i].main.temp,
-        maxTemp: data.list[i].main.temp_max,
-        minTemp: data.list[i].main.temp_min,
+        maxTemp: Math.round(data.list[i].main.temp_max * 10) / 10,
+        minTemp: Math.round(data.list[i].main.temp_min * 10) / 10,
       }));
 
       return {

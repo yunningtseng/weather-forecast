@@ -10,9 +10,7 @@ function PieChart({ percentage, date }: Props) {
       <div
         className="mt-2 w-24 h-24 rounded-full"
         style={{
-          background: `conic-gradient(#1AA6B7 0% ${percentage}%, #dce5e6 ${
-            100 - percentage
-          }%)`,
+          background: `conic-gradient(#1AA6B7 0% ${percentage}%, #dce5e6 ${percentage}% 100%)`,
         }}
       />
       <p className="mt-2 text-center text-third text-sm font-bold">{date}</p>

@@ -5,8 +5,8 @@ interface Props {
 }
 
 function BarChart({ title, list, date }: Props) {
-  const max = Math.max(...list) + 10;
-  const min = Math.min(...list) - 10;
+  const max = Math.max(...list);
+  const min = Math.min(...list);
 
   return (
     <div className="mt-10">
@@ -16,16 +16,18 @@ function BarChart({ title, list, date }: Props) {
           <div key={index} className="table">
             <div className="table-cell align-bottom h-36">
               <div className="text-center text-third text-sm font-bold">
-                {item}
+                {item.toFixed(1)}
               </div>
 
               <div
                 className="mx-1 bg-secondary w-12 rounded-t-lg hover:bg-third animate-barChart"
                 style={{
-                  height: `${(100 * (item - min)) / (max - min)}%`,
+                  height: `${(60 * (item - min)) / (max - min) + 15}%`,
                 }}
               />
-              <p className="text-center text-third text-sm font-bold">{date[index]}</p>
+              <p className="text-center text-third text-sm font-bold">
+                {date[index]}
+              </p>
             </div>
           </div>
         ))}
