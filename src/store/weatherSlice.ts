@@ -7,11 +7,11 @@ export interface WeatherState {
   city: string;
   weatherList: WeatherDetail[];
   errorMessage: string;
-  unit: string;
+  unit: 'metric' | 'imperial';
 }
 
 const initialState: WeatherState = {
-  city: 'Taipei',
+  city: '',
   weatherList: [],
   errorMessage: '',
   unit: 'metric',
@@ -32,7 +32,10 @@ const weatherSlice = createSlice({
       state.city = action.payload;
     },
 
-    setUnit: (state: WeatherState, action: PayloadAction<string>) => {
+    setUnit: (
+      state: WeatherState,
+      action: PayloadAction<'metric' | 'imperial'>,
+    ) => {
       state.unit = action.payload;
     },
 

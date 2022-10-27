@@ -22,8 +22,8 @@ function App() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    dispatch(fetchData(city, unit));
-  }, [dispatch, city, unit]);
+    dispatch(fetchData('Taipei', 'metric'));
+  }, [dispatch]);
 
   return (
     <div className="w-full bg-primary px-5 pt-16">
