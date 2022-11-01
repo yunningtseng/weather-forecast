@@ -8,6 +8,7 @@
 - Tailwind
 - Firebase Hosting
 - CI/CD: GitHub Action
+- React Testing Library
 - eslint
 - prettier
 - Weather API
